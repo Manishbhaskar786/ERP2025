@@ -68,3 +68,10 @@
         <label class="col-form-label" for="IsDefault">Is Default</label>
         </div>
     </div>
+<script>
+    $('#PANNumber,#GSTNumber').keyup(function () {
+        var panNumber = $(this).val();
+        var panNumber = panNumber.toUpperCase();
+        $(this).val(panNumber);
+    })
+</script>
