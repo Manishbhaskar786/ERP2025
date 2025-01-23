@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+	<texts>
+		<text name="HomePage" value="Home page" />
+		<text name="About" value="About" />
+		<text name="WelcomeMessage" value="Welcome to ERPack!" />
+		<text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
+		<text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
+		<text name="InvalidUserNameOrPassword" value="Invalid user name or password" />
+		<text name="ThereIsNoTenantDefinedWithName{0}" value="There is no tenant defined with name {0}" />
+		<text name="TenantIsNotActive" value="Tenant {0} is not active." />
+		<text name="UserIsNotActiveAndCanNotLogin" value="User {0} is not active and can not log in." />
+		<text name="UserEmailIsNotConfirmedAndCanNotLogin">Your email address is not confirmed. You can not login.</text>
+		<text name="UserLockedOutMessage">The user account has been locked out. Please try again later.</text>
+		<text name="PleaseEnterLoginInformation" value="Please enter login information" />
+		<text name="TenancyName" value="Tenancy name" />
+		<text name="UserNameOrEmail" value="User name or email" />
+		<text name="Password" value="Password" />
+		<text name="ResetPassword" value="Reset Password" />
+		<text name="UpdatePassword" value="Update Password" />
+		<text name="RememberMe" value="Remember me" />
+		<text name="LogIn" value="Log in" />
+		<text name="LoginFailed" value="Login failed!" />
+		<text name="NameSurname" value="Name surname" />
+		<text name="UserName" value="User name" />
+		<text name="Name" value="Name" />
+		<text name="Surname" value="Surname" />
+		<text name="EmailAddress" value="Email address" />
+		<text name="Tenants" value="Tenants" />
+		<text name="SavedSuccessfully" value="Saved successfully" />
+		<text name="ErrorSaving" value="Error in Saving!" />
+		<text name="CreateNewTenant" value="Create new tenant" />
+		<text name="AdminEmailAddress" value="Admin email address" />
+		<text name="AdminPassword" value="Admin password" />
+		<text name="Save" value="Save" />
+		<text name="Cancel" value="Cancel" />
+		<text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
+		<text name="DefaultPasswordIs" value="Default password is {0}" />
+		<text name="CanBeEmptyToLoginAsHost" value="Can be empty to login as host." />
+		<text name="Register" value="Register" />
+		<text name="OrLoginWith" value="Or login with" />
+		<text name="WaitingForActivationMessage" value="Your account is waiting to be activated by system admin." />
+		<text name="TenantSelection" value="Tenant Selection" />
+		<text name="TenantSelection_Detail" value="Please select one of the following tenants." />
+		<text name="Logout" value="Logout" />
+		<text name="RegisterFormUserNameInvalidMessage">Please don't enter an email address for username.</text>
+		<text name="DatabaseConnectionString" value="Database connection string" />
+		<text name="Users" value="Users" />
+		<text name="UsersList" value="Users List" />
+		<text name="CreateUser" value="Create User" />
+		<text name="DOB" value="Date of birth" />
+		<text name="Gender" value="Gender" />
+		<text name="Address" value="Address" />
+		<text name="City" value="City" />
+		<text name="State" value="State" />
+		<text name="Pincode" value="Pincode" />
+		<text name="Country" value="Country" />
+		<text name="Mobile" value="Mobile" />
+		<text name="DOJ" value="DOJ" />
+		<text name="Designation" value="Designation" />
+		<text name="IsActive" value="Is active" />
+		<text name="FullName" value="Full name" />
+		<text name="CreateNewUser" value="Create new user" />
+		<text name="CreateNewDepartment" value="Create new department" />
+		<text name="Yes" value="Yes" />
+		<text name="No" value="No" />
+		<text name="Optional" value="Optional" />
+		<text name="LeaveEmptyToSwitchToHost">Leave empty to switch to the host</text>
+		<text name="CurrentTenant">Current tenant</text>
+		<text name="NotSelected">Not selected</text>
+		<text name="Change">Change</text>
+		<text name="ChangeTenant">Change tenant</text>
+		<text name="MultiLevelMenu">Multi Level Menu</text>
+		<text name="Back">Back</text>
+		<text name="SuccessfullyRegistered">Successfully registered</text>
+		<text name="WaitingForEmailActivation">Your email address should be activated</text>
+		<text name="Roles">Roles</text>
+		<text name="DisplayName">Display Name</text>
+		<text name="Edit">Edit</text>
+		<text name="Delete">Delete</text>
+		<text name="CreateNewRole">Create new role</text>
+		<text name="RoleName">Role Name</text>
+		<text name="Actions">Actions</text>
+		<text name="CouldNotCompleteLoginOperation">Could not complete login operation. Please try again later.</text>
+		<text name="CouldNotValidateExternalUser">Could not validate external user</text>
+		<text name="EditRole">Edit role</text>
+		<text name="EditTenant">Edit tenant</text>
+		<text name="EditUser">Edit user</text>
+		<text name="TenantIdIsNotActive{0}">TenantId {0} is not active</text>
+		<text name="UnknownTenantId{0}">Unknown tenantId {0}</text>
+		<text name="ThisFieldIsRequired">This field is required</text>
+		<text name="PleaseWait">Please wait...</text>
+		<text name="Administration">Administration</text>
+		<text name="ClearAll">Clear all</text>
+		<text name="ClearOthers">Clear others</text>
+		<text name="LabelOptions">Label options</text>
+		<text name="Permissions">Permissions</text>
+		<text name="RoleDescription">Role description</text>
+		<text name="Refresh">Refresh</text>
+		<text name="Create">Create</text>
+		<text name="UserDetails">User details</text>
+		<text name="UserRoles">User roles</text>
+		<text name="ConfirmPassword">Confirm password</text>
+		<text name="Version">Version</text>
+		<text name="On">On</text>
+		<text name="Off">Off</text>
+		<text name="AreYouSureWantToDelete">Are you sure want to delete {0}?</text>
+		<text name="SuccessfullyDeleted">Successfully deleted</text>
+		<text name="StartTyping">Start Typing</text>
+		<text name="Skins">Skins</text>
+		<text name="Settings">Settings</text>
+		<text name="Filter">Filter</text>
+		<text name="CurrentPassword">Current Password</text>
+		<text name="NewPassword">New Password</text>
+		<text name="ConfirmNewPassword">Confirm New Password</text>
+		<text name="PasswordsDoNotMatch">Passwords do not match</text>
+		<text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber">Passwords must be at least 8 characters, contain a lowercase, uppercase, and number</text>
+		<text name="UserDeleteWarningMessage">User {0} will be deleted.</text>
+		<text name="RoleDeleteWarningMessage">Role {0} will be deleted and unassigned from all assigned users.</text>
+		<text name="TenantDeleteWarningMessage">Tenant {0} will be deleted.</text>
+		<text name="SearchWithThreeDot">Search...</text>
+		<text name="PleaseEnterAtLeastNCharacter">Please enter at least {0} characters</text>
+		<text name="PleaseEnterNoMoreThanNCharacter">Please enter no more than {0} characters</text>
+		<text name="InvalidEmailAddress">Invalid email address</text>
+		<text name="InvalidPattern">Invalid</text>
+		<text name="PairsDoNotMatch">Do not match</text>
+		<text name="All">All</text>
+		<text name="TotalRecordsCount">Total: {0}</text>
+		<text name="Search">Search</text>
+		<text name="Clear">Clear</text>
+		<text name="ResetPasswordStepOneInfo">1. Enter your administrator password</text>
+		<text name="ResetPasswordStepTwoInfo">2. Copy this random password so you can send it to the user</text>
+		<text name="UsersActivation">Users activation</text>
+		<text name="Customers" value="Customers" />
+		<text name="CustomersList" value="Customers List" />
+		<text name="CreateCustomer" value="Create Customer" />
+		<text name="ContactPerson" value="Contact Person" />
+		<text name="ContactNo" value="Contact No" />
+		<text name="PAN" value="PAN" />
+		<text name="GSTNo" value="GST No" />
+		<text name="Website" value="Website" />
+		<text name="Materials" value="Materials" />
+		<text name="AddMaterial" value="Add Material" />
+		<text name="MaterialsList" value="Materials List" />
+		<text name="ItemCode" value="Item Code" />
+		<text name="ItemType" value="Item Type" />
+		<text name="BuyingUnit" value="Buying Unit" />
+		<text name="SellingUnit" value="Selling Unit" />
+		<text name="Price" value="Price" />
+		<text name="HSN" value="HSN" />
+		<text name="CGST" value="CGST" />
+		<text name="IGST" value="IGST" />
+		<text name="SGST" value="SGST" />
+		<text name="Department" value="Department" />
+		<text name="CreateUnit" value="Create Unit" />
+		<text name="Unit" value="Unit" />
+		<text name="Description">Description</text>
+		<text name="Inventory">Inventory</text>
+		<text name="Stores">Stores</text>
+		<text name="Store">Store</text>
+		<text name="StoreName">Store Name</text>
+		<text name="StoreLocation">Store Location</text>
+		<text name="AddNewStore">Add New Store</text>
+		<text name="Purchase">Purchase</text>
+		<text name="Vendors">Vendors</text>
+		<text name="VendorsList">VendorsList</text>
+		<text name="AddVendor">Add Vendor</text>
+		<text name="VendorName">Vendor Name</text>
+		<text name="VendorCode">Vendor Code</text>
+		<text name="GST">GST</text>
+		<text name="Bank">Bank</text>
+		<text name="AccountNo">Account No</text>
+		<text name="Branch">Branch</text>
+		<text name="IFSC">IFSC</text>
+		<text name="Phone">Phone Number</text>
+		<text name="DocumentType">Document Type</text>
+		<text name="DocumentNumber">Document Number</text>
+		<text name="DocumentUrl">Document Url</text>
+		<text name="Company">Company</text>
+		<text name="Preferences">Preferences</text>
+		<text name="PreferencesList">Preferences List</text>
+		<text name="AddPreference">Add Preference</text>
+		<text name="NameIdentifier">Name Identifier</text>
+		<text name="FixedName">Fixed Name</text>
+		<text name="YearSelection">Year Selection</text>
+		<text name="MonthSelection">Month Selection</text>
+		<text name="Material">Material</text>
+		<text name="Customer">Customer</text>
+		<text name="IssueInventory">Issue Inventory</text>
+		<text name="IssuedInventoryList">Issued Inventory List</text>
+		<text name="CRM">CRM</text>
+		<text name="Production">Production</text>
+		<text name="Design">Design</text>
+		<text name="WorkOrderList">WorkOrder List</text>
+		<text name="AddWorkOrder">Add WorkOrder</text>
+		<text name="EnquiryList">Enquiry List</text>
+		<text name="NewEnquiry">New Enquiry</text>
+		<text name="EstimateList">Estimate List</text>
+		<text name="CreateEstimate">Create Estimate</text>
+		<text name="PurchaseOrder">Purchase Order</text>
+		<text name="PurchaseOrderList">Purchase Order List</text>
+		<text name="PurchaseReceive">Purchase Receive</text>
+		<text name="PurchaseReceiveList">Purchase Receive List</text>
+		<text name="PurchaseIndentList">Purchase Indent List</text>
+		<text name="PurchaseIndent">Purchase Indent</text>
+		<text name="Vendor">Vendor</text>
+		<text name="WorkorderId">Workorder Id</text>
+		<text name="Estimates">Estimates</text>
+		<text name="NetAmount">Net Amount</text>
+		<text name="Date">Date</text>
+		<text name="Enquiry">Enquiry</text>
+		<text name="DateTime">DateTime</text>
+		<text name="DesignNumber">Design Number</text>
+		<text name="DesignName">Design Style</text>
+		<text name="DesignUsers">DesignUsers</text>
+		<text name="Length">Length</text>
+		<text name="Width">Width</text>
+		<text name="Height">Height</text>
+		<text name="SheetSizeLength">SheetSize Length</text>
+		<text name="SheetSizeWidth">SheetSize Width</text>
+		<text name="BoardType">Board Type</text>
+		<text name="ToolType">Tool Type</text>
+		<text name="ToolConfiguration">Tool Configuration</text>
+		<text name="ToolFamily">Tool Family</text>
+		<text name="Comments">Comments</text>
+		<text name="EnquiryId">Enquiry Id</text>
+		<text name="Job">Job</text>
+		<text name="EstimateApproval">Estimate Approval</text>
+		<text name="Approval">Approval</text>
+		<text name="Status">Status</text>
+		<text name="HighPriority">High Priority</text>
+		<text name="Designs">Designs</text>
+		<text name="Estimate">Estimate</text>
+		<text name="Completed">Completed</text>
+		<text name="Completion">Completion</text>
+		<text name="Time">Time</text>
+		<text name="Workorders">Workorders</text>
+		<text name="Workorder">Workorder</text>
+		<text name="AllocationTime">Allocation Time</text>
+		<text name="Expected">Expected</text>
+		<text name="FromInventoryRequest">From Inventory Request</text>
+		<text name="Manual">Manual</text>
+		<text name="InventoryIssueId">Inventory Issue Id</text>
+		<text name="PurchaseReceives">Purchase Receives</text>
+		<text name="PurchaseOrders">Purchase Orders</text>
+		<text name="PurchaseIndents">Purchase Indents</text>
+		<text name="POCode">PO Code</text>
+		<text name="PurchaseItem">Purchase Item</text>
+		<text name="Quantity">Quantity</text>
+		<text name="RequiredBy">Required By</text>
+		<text name="Remarks">Remarks</text>
+		<text name="RequestedBy">Requested By</text>
+		<text name="Enquiries">Enquiries</text>
+		<text name="Industry">Industry</text>
+		<text name="Category">Category</text>
+		<text name="CreateCategory">Create Category</text>
+		<text name="UploadDesign">Upload Design</text>
+		<text name="EstimateId">Estimate Id</text>
+		<text name="SendToEstimate">Send To Estimate</text>
+		<text name="UploadReport">Upload Report</text>
+		<text name="Preview">Preview</text>
+		<text name="WorkorderPreview">Workorder Preview</text>
+		<text name="Pdf">Pdf</text>
+		<text name="Email">Email</text>
+		<text name="IssueCode">Issue Code</text>
+		<text name="IssueDate">Issue Date</text>
+		<text name="IssuedBy">Issued By</text>
+		<text name="SendToDesign">Send To Design</text>
+		<text name="SubtaskId">Subtask Id</text>
+		<text name="CompletionBy">Completion By</text>
+		<text name="InventoryRequestId">Inventory Request Id</text>
+		<text name="InventoryRequestBy">Inventory Request By</text>
+		<text name="Planning">Planning</text>
+		<text name="Sno">Sno.</text>
+		<text name="MaterialName">Material Name</text>
+		<text name="Jobs">Jobs</text>
+		<text name="JobCard">Job Card</text>
+		<text name="EditComapny">Edit Comapny</text>
+		<text name="EditHostInfo">Edit Host Info</text>
+		<text name="BankName">Bank Name</text>
+		<text name="AccountNumber">Account Number</text>
+		<text name="IFSCCode">IFSC Code</text>
+		<text name="GSTNumber">GST Number</text>
+		<text name="PANNumber">PAN Number</text>
+	</texts>
+</localizationDictionary>

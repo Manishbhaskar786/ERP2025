@@ -1,0 +1,78 @@
+﻿@using ERPack.Web.Startup
+@{
+    ViewBag.Title = L("Materials");
+    ViewBag.CurrentPageName = PageNames.Materials;
+}
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Materials/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Materials/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Materials")</h1>
+            </div>
+            <div class="col-sm-6">
+                <a href="Materials/AddMaterial" class="btn bg-blue float-sm-right">
+                    <i class="fa fa-plus-square"></i>
+                    @L("Create")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Use for bulk actions-->
+                                <div id="bulkActions" style="display: none;">
+                                    <h3>
+                                        <a onclick="fnCreatePdf()" href="#"><i class="fas fa-file-pdf"></i></a> &nbsp;
+                                        <a onclick="fnCreateCSV()" href="#"><i class="fas fa-file-excel"></i></a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="MaterialsTable" class="table table-striped table-bordered nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="selectAll"></th>
+                                        <th>@L("MaterialName")</th>
+                                        <th>@L("ItemCode")</th>
+                                        <th>@L("ItemType")</th>
+                                        <th>@L("Department")</th>
+                                        <th>@L("BuyingUnit")</th>
+                                        <th>@L("SellingUnit")</th>
+                                        <th>@L("BuyingUnit") @L("Price")</th>
+                                        <th>@L("SellingUnit") @L("Price")</th>
+                                        <th>@L("HSN")</th>
+                                        <th>@L("CGST")</th>
+                                        <th>@L("SGST")</th>
+                                        <th>@L("IGST")</th>
+                                        <th style="width: 150px">@L("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

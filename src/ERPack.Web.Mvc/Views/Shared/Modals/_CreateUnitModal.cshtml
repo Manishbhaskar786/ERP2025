@@ -1,0 +1,26 @@
+﻿@using Abp.Authorization.Users
+@using Abp.MultiTenancy
+@using ERPack.MultiTenancy
+@using ERPack.Web.Models.Common.Modals
+@{
+    Layout = null;
+}
+<div class="modal fade" id="UnitCreateModal" tabindex="-1" role="dialog" aria-labelledby="UnitCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateUnit")))
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("Name")</label>
+                        <div class="col-md-9">
+                        <input type="text" name="UnitName" id="UnitName" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default close-button" data-dismiss="modal">@L("Cancel")</button>
+                    <button type="submit" id="saveUnit" class="btn btn-primary save-button">@L("Save")</button>
+                </div>
+        </div>
+    </div>
+</div>

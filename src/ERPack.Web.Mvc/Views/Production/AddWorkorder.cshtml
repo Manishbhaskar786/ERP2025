@@ -1,0 +1,220 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.Production
+@model AddEditWorkorderModel
+@{
+    ViewBag.Title = L("Workorder");
+    ViewBag.CurrentPageName = PageNames.AddWorkOrder;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Workorder")</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form name="workorderCreateForm" id="workorderCreateForm" role="form" class="form-horizontal">
+                            <input id="id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="DesignId">@L("Estimate")</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                                    </div>
+                                                    @if(Model != null && Model.EstimateId == 0)
+                                                        {
+                                                    <select class="form-control" id="estimateId" name="EstimateId" onchange="GetEstimateTasks(this.value)">
+                                                        <option value="">Select @L("Estimate")</option>
+                                                        @if (Model != null && Model.Estimates != null)
+                                                        {
+                                                            @foreach (var v in Model.Estimates)
+                                                            {
+                                                                <option value="@v.Id">@v.EstimateId</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="hidden" class="form-control" id="estimateId" name="EstimateId" value="@Model.EstimateId">
+                                                        <input type="text" class="form-control" id="estimateCode" name="EstimateCode" value="@Model.EstimateCode"  readonly>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>@L("WorkorderId")</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="workorderId" name="WorkorderId" value="@Model.WorkorderId" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>@L("Description")</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="description" name="Description" value="@Model.Description" maxlength="255">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-check form-check-primary mt-4">
+                                                    <input type="checkbox" class="form-check-input" id="isHighPriority">
+                                                    <label class="form-check-label"> High Priority</label>
+                                                    <input type="hidden" id="hdnHighPriority" name="IsHighPriority">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <hr />
+                        <div class="row">
+                            <div class="col-12">
+                                <table id="tblTask">
+                                    <thead>
+                                        <tr style="text-align: center;">
+                                            <th>Id</th>
+                                            <th>Material</th>
+                                            <th>Unit</th>
+                                            <th>Qty</th>
+                                            <th>TaskIssueDate</th>
+                                            <th>TaskToBeCompleted</th>
+                                            <th>TaskActualCompletionDate</th>
+                                            <th>User</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="taskRow">
+                                            <td>
+                                                <input type="hidden" id="hdnMaterialId0" name="MaterialId">
+                                                <input type="text" id="materialId0" class="form-control" readonly />
+                                            </td>
+                                            <td>
+                                                <select class="form-control" id="materialName0" onchange="fnFillMaterialInfo(this)">
+                                                    <option value="" selected>Select @L("Material")</option>
+                                                    @if (Model != null && Model.Materials != null)
+                                                    {
+                                                        @foreach (var v in Model.Materials)
+                                                        {
+                                                            <option value="@v.Id">@v.DisplayName</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" id="unitId0">
+                                                <select class="form-control" id="unitName0">
+                                                    <option value="" selected>Select @L("Unit")</option>
+                                                    @if (Model != null && Model.Units != null)
+                                                    {
+                                                        @foreach (var v in Model.Units)
+                                                        {
+                                                            <option value="@v.Id">@v.UnitName</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="quantity0" oninput="validateInput20digitwith2decimal(this)" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input type="datetime-local" id="taskIssueDate0" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss")" />
+                                            </td>
+                                            <td>
+                                                <input type="datetime-local" id="taskToBeCompleted0" class="form-control" value="@DateTime.Now.AddMinutes(60).ToString("yyyy-MM-ddThh:mm:ss")" />
+                                            </td>
+                                            <td>
+                                                <input type="datetime-local" id="taskActualCompletionDate0" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input type="hidden" id="departmentId0">
+                                                <input type="hidden" id="departmentUserId0">
+                                                <select class="form-control" id="departmentUsers0">
+                                                </select>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="javascript:void(0)"><i class="fas fa-trash" hidden></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="11" style="text-align: left;">
+                                                <input type="button" class="btn btn-primary " id="addRow" value="Add Row" />
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" id="divSubTasks" style="display:none">
+                            <div class="col-12">
+                                <table id="tblSubTask">
+                                    <thead>
+                                        <tr style="text-align: center;">
+                                            <th>Department</th>
+                                            <th>Sub Workorder Id</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="subTaskRow">
+                                            <td>
+                                                <input type="hidden" id="hdnDepartmentId0" name="DepartmentId">
+                                                <input type="text" id="departmentName0" class="form-control" readonly />
+                                            </td>
+                                            <td>
+                                                <input type="text" id="subWorkorderId0" class="form-control" readonly />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-success save-button" onclick="SaveWorkorder()">@L("Save")</button>
+                        <button type="button" class="btn btn-primary" onclick="ShowPreview()">@L("Preview")</button>
+                        <button type="button" class="btn btn-primary" onclick="GeneratePdf()">@L("Pdf")</button>
+                        <button type="button" class="btn btn-primary" onclick="SendEmail()">@L("Email")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_WorkorderPreviewModal.cshtml")
+
+@section scripts
+    {
+    <script src="~/view-resources/Views/Production/Workorder.js" asp-append-version="true"></script>
+}

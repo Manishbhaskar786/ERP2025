@@ -1,0 +1,242 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.Vendors
+@model AddEditVendorModel
+@{
+    ViewBag.Title = L("AddVendor");
+    ViewBag.CurrentPageName = PageNames.AddVendor;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("AddVendor")</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form name="vendorCreateForm" id="vendorCreateForm" role="form" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="card-body">
+                            <input id="Id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group required">
+                                        <label>@L("VendorCode")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="VendorCode" id="VendorCode" value="@Model.VendorCode" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label>@L("VendorName")*</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="VendorName" id="VendorName" value="@Model.VendorName" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label>@L("EmailAddress")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" id="email" name="Email" value="@Model.Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("ContactPerson")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-address-book"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="ContactPerson" onkeydown="return (event.key.match(/^[a-zA-Z0-9]$/) || event.key === 'Backspace' || event.key === ' ');" value="@Model.ContactPerson" id="ContactPerson">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Designation")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Designation" value="@Model.Designation" id="Designation">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Phone")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="PhoneNo" onkeydown="return restrictNonNumeric(event)" value="@Model.PhoneNo" id="PhoneNo">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Bank")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="BankName" value="@Model.BankName" id="BankName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Branch")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Branch" value="@Model.Branch" id="Branch">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("PAN")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="PanCard" value="@Model.PanCard" id="PanCard">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>@L("Address")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="@Model.Address1" name="Address1" id="Address1" maxlength="255">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Address")2</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Address2" value="@Model.Address2" id="Address2" maxlength="255">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("City")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-city"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="City" value="@Model.City" id="City">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("State")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="State" value="@Model.State" id="State" onkeydown="return (event.key.match(/^[a-zA-Z0-9]$/) || event.key === 'Backspace' || event.key === ' ');">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Pincode")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-pin"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Pincode" value="@Model.PinCode" id="Pincode">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Country")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-flag"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Country" value="@Model.Country" id="Country">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("AccountNo")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="AccountNumber" value="@Model.AccountNumber" id="AccountNumber">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("IFSC")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="IFSC" value="@Model.IFSC" id="IFSC">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("GST")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="GST" value="@Model.GST" id="GST">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group required">
+                                        <label>@L("DocumentType")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="DocumentType" value="@Model.DocumentType" id="DocumentType">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group required">
+                                        <label>@L("DocumentNumber")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="DocumentNumber" value="@Model.DocumentNumber" id="DocumentNumber">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group required">
+                                        <label>@L("DocumentUrl")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="DocumentUrl" value="@Model.DocumentUrl" id="DocumentUrl">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right save-button">@L("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+    {
+    <script src="~/view-resources/Views/Vendors/CreateVendor.js" asp-append-version="true"></script>
+}

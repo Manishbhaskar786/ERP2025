@@ -1,0 +1,84 @@
+﻿@using ERPack.Web.Startup
+@{
+    ViewBag.Title = L("Vendors");
+    ViewBag.CurrentPageName = PageNames.Vendors;
+}
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Vendors/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Vendors/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Vendors")</h1>
+            </div>
+            <div class="col-sm-6">
+                <a href="Vendors/AddVendor" class="btn bg-blue float-sm-right">
+                    <i class="fa fa-plus-square"></i>
+                    @L("Create")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Use for bulk actions-->
+                                <div id="bulkActions" style="display: none;">
+                                    <h3>
+                                        <a onclick="fnCreatePdf()" href="#"><i class="fas fa-file-pdf"></i></a> &nbsp;
+                                        <a onclick="fnCreateCSV()" href="#"><i class="fas fa-file-excel"></i></a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="VendorsTable" class="table table-striped table-bordered nowrap">
+                                <thead>
+                                    <tr>
+                                        <th class="selectAll"></th>
+                                        <th>@L("VendorCode")</th>
+                                        <th>@L("Name")</th>
+                                        <th>@L("Address")1</th>
+                                        <th>@L("Address")2</th>
+                                        <th>@L("City")</th>
+                                        <th>@L("State")</th>
+                                        <th>@L("Pincode")</th>
+                                        <th>@L("Country")</th>
+                                        <th>@L("ContactPerson")</th>
+                                        <th>@L("Designation")</th>
+                                        <th>@L("GST")</th>
+                                        <th>@L("Bank")</th>
+                                        <th>@L("AccountNo")</th>
+                                        <th>@L("Branch")</th>
+                                        <th>@L("IFSC")</th>
+                                        <th>@L("PAN")</th>
+                                        <th>@L("EmailAddress")</th>
+                                        <th>@L("Phone")</th>
+                                        <th style="width: 150px">@L("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

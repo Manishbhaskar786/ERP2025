@@ -1,0 +1,89 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.HostTaxationInfo;
+@model AddEditHostTaxationDetailsModel
+
+@{
+    ViewBag.Title = L("AddEditHostTaxatinInfo");
+    Layout = null;
+}
+
+<form id="hosttaxationinfoform">
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row mr-3">
+            <label class="col-form-label">AddressName</label>
+            <div>
+                <input type="text" name="AddressName" id="addressName" class="form-control" required>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row">
+            <label class="col-form-label">Address 1</label>
+            <div>
+                <input type="text" name="Address1" id="address1" class="form-control" minlength="2">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex flex-column form-group row mr-3">
+            <label class="col-form-label">Address 2</label>
+            <div>
+                <input type="text" name="Address2" id="address2" class="form-control">
+            </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row">
+            <label class="col-form-label">City</label>
+            <div>
+                <input type="text" name="City" id="city" class="form-control" minlength="2">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row mr-3">
+            <label class="col-form-label">State</label>
+            <div>
+                @Html.DropDownListFor(m => m.State, new SelectList(Model.States, "StateName", "StateName", Model.State), "Select State", new { @class = "form-control", @id = "state" })
+            </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row">
+            <label class="col-form-label">Country</label>
+            <div>
+                @Html.DropDownListFor(m => m.Country, new SelectList(Model.Countries, "CountryName", "CountryName", Model.Country), "Select Country", new { @class = "form-control", @id = "country" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row mr-3">
+            <label class="col-form-label">Pin Code</label>
+            <div>
+                <input type="text" name="PinCode" id="pincode" class="form-control" maxlength="6">
+            </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row">
+            <label class="col-form-label">PAN No.</label>
+            <div>
+                <input type="text" name="PANNumber" id="panNumber" class="form-control" minlength="2">
+                <span class="text-danger" id="panError"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex flex-column form-group required row mr-3">
+            <label class="col-form-label">GST No.</label>
+            <div>
+                <input type="text" name="GSTNumber" id="GSTNumber" class="form-control">
+                <span class="text-danger" id="gstError"></span>
+            </div>
+        </div>
+        <div class="align-items-center col-12 col-md-6 form-group mb-0 mt-3 row">
+            <input type="checkbox" class="mt-1" id="isDefault" name="IsDefault" minlength="2">
+            <label class="col-form-label ml-2">Test</label>
+        </div>
+    </div>
+    <div class="float-right">
+        <button type="submit" class="btn btn-primary" id="submit-hostTaxationForm">Submit</button>
+    </div>
+</form>
+
+@section scripts
+{
+    <script src="~/view-resources/Views/HostInfo/AddEditHostTaxationInfo.js" asp-append-version="true"></script>
+}

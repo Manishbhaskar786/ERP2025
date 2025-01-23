@@ -1,0 +1,148 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.Users
+@{
+    ViewBag.Title = L("Customers");
+    ViewBag.CurrentPageName = PageNames.Customers;
+}
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Customers/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Customers/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Customers")</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home Page</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Customers</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-sm-6">
+                <a onclick='return renderCustPage()' class="btn bg-blue float-sm-right">
+                    <i class="fa fa-plus-square"></i>
+                    @L("Create")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Use for bulk actions-->
+                                <button id="import-customer" class="btn btn-primary">Import Customers</button>
+                                <div id="bulkActions" style="display: none;">
+                                    <h3>
+                                        <a onclick="fnCreatePdf()" href="#"><i class="fas fa-file-pdf"></i></a> &nbsp;
+                                        <a onclick="fnCreateCSV()" href="#"><i class="fas fa-file-excel"></i></a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="CustomersTable" class="table table-striped table-bordered nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="selectAll"></th>
+                                    <th>Company Name</th>
+                                    <th>@L("Industry")</th>
+                                    <th>@L("Category")</th>
+                                    <th>Currency</th>
+                                    <th>@L("City")</th>
+                                    <th>@L("State")</th>
+                                    <th style="width: 150px">@L("Actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="import-customer-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Import Customers</h5>
+                <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Warning: To ensure correct data formatting, please download the
+                    sample file before importing customer information. This file will guide
+                    you in using the correct structure for bulk imports. .xlsx or .csv files are supported for bulk imports.
+                </p>
+                <a style="cursor: pointer;" onclick="downloadfile()" class="text-blue"><i class="fa fa-download"></i> Sample File</a>
+                <form asp-action="ImportCustomer" asp-controller="Customers" method="post" enctype="multipart/form-data" id="importForm">
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="upload-customer-file" name="importFile">
+                                    <label class="custom-file-label" for="upload-customer-file" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                                </div>
+                            </div>
+                            <div id="import-error" class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 align-items-center col-12 d-flex justify-content-center" style="gap: 10px;">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript'>
+
+    function renderCustPage() {
+        window.location = '/Customers/CreateCustomer';
+    }
+
+    function downloadfile() {
+        var url = '/ImportSampleFile/Customer_Sample_Import.xlsx';
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob(); // Convert the response to a Blob
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob); // Create a URL for the Blob
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'Customer_Sample_Import.xlsx'; // Specify the name of the file to be downloaded
+                document.body.appendChild(link);
+                link.click(); // Programmatically click the link to trigger the download
+                link.remove(); // Remove the link from the document
+                window.URL.revokeObjectURL(url); // Clean up the URL object
+            })
+            .catch(error => {
+                alert("Something went wrong")
+            });
+    }
+</script>

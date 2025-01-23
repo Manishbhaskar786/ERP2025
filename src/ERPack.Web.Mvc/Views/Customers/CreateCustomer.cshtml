@@ -1,0 +1,332 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.Common.Modals
+@using ERPack.Web.Models.Customers
+@using Abp.Authorization.Users
+@model AddEditCustomerModel
+@{
+    ViewBag.Title = L("CreateCustomer");
+    ViewBag.CurrentPageName = PageNames.CreateCustomer;
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1> @(Model.Id > 0 ? "Edit Customer" : L("CreateCustomer"))</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home Page</a></li>
+                        <li class="breadcrumb-item"><a href="/Customers">Customers</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@(Model.Id > 0 ? "Edit" : "Create") Customer</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form name="customerCreateForm" id="customerCreateForm" role="form" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <input id="Id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <div class="row col-md-12">
+                                <div class="form-group col-md-4 required">
+                                    <label>@L("Customer") Id</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="CustomerId" id="CustomerId" value="@Model.CustomerId" readonly required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 required">
+                                    <label>Company Name*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Name" id="Name" value="@Model.Name" required maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 required">
+                                    <label>@L("EmailAddress")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" name="EmailAddress" id="EmailAddress" value="@Model.EmailAddress" required maxlength="100">
+                                        <span asp-validation-for="@Model.EmailAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>@L("Industry")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-industry"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Industry" id="Industry" value="@Model.Industry">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>@L("Category")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-list"></i></span>
+                                        </div>
+                                        <select class="form-control" id="CategoryId" name="CategoryId">
+                                            <option value="" selected>Select @L("Category")</option>
+                                            @foreach (var v in Model.Categories)
+                                            {
+                                                if (v.Id == Model.CategoryId)
+                                                {
+                                                    <option value="@v.Id" selected>@v.CategoryName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@v.Id">@v.CategoryName</option>
+                                                }
+                                            }
+                                        </select>
+                                        <span class="input-group-append">
+                                            <a href="javascript:;" data-toggle="modal" data-target="#CategoryCreateModal" class="btn btn-primary"><i class="fa fa-plus-square"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>@L("Website")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Website" value="@Model.Website" id="Website">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>@L("City")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-city"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="City" value="@Model.City" id="City" onkeypress="return blockSpecialChar(event)">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>@L("State")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.StateId, new SelectList(Model.States, "StateId", "StateName", Model.StateId), "Select State", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 ">
+                                    <label>@L("Country")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-flag"></i></span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "CountryId", "CountryName", Model.CountryId), "Select Country", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Company Logo</label>
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input form-control" name="ImageFile" id="ImageFile">
+                                            <label class="custom-file-label" for="ImageFile">@(string.IsNullOrEmpty(Model.CompanyLogo) ? "Choose File" : Model.CompanyLogo)</label>
+                                            <input type="hidden" id="hdnFile" value="@Model.CompanyLogo" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Business Currency*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                        </div>
+                                        <select class="form-control" id="BusinessCurrencyId" name="BusinessCurrencyId">
+                                            <option value="" selected>Select Currency</option>
+                                            @foreach (var v in Model.BusinessCurrencies)
+                                            {
+                                                if (v.Id == Model.BusinessCurrencyId)
+                                                {
+                                                    <option value="@v.Id" selected>@v.Code</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@v.Id">@v.Code</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 required">
+                                    <label>PAN Number*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="PAN" value="@Model.PAN" id="PAN" maxlength="10" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right save-button">@L("Save")</button>
+                        </div>
+                    </form>
+
+                    @if (Model.Id > 0)
+                    {
+                        @* Contact detail part *@
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h1>Contact Details</h1>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="javascript:;" class="btn bg-blue float-sm-right" onclick="OpenContactModal()"> <i class="fa fa-plus-square"></i> Add Contact Details</a>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </section>
+                        <section class="content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table id="ContactsTable" class="table table-striped table-bordered nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="selectAll"></th>
+                                                            <th>@L("FullName")</th>
+                                                            <th>@L("Designation")</th>
+                                                            <th>@L("EmailAddress")</th>
+                                                            <th>Contact</th>
+                                                            <th style="width: 150px">@L("Actions")</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        @* Taxation Part *@
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h1>Taxation/Address Details</h1>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="javascript:;" class="btn bg-blue float-sm-right" onclick="OpenTaxationModal()"> <i class="fa fa-plus-square"></i> Add Details</a>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </section>
+                        <section class="content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table id="CustomerTaxationTable" class="table table-striped table-bordered nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="selectAll"></th>
+                                                            <th>Address Name</th>
+                                                            <th>@L("Address")</th>
+                                                            <th>@L("Address") 2</th>
+                                                            <th>@L("City")</th>
+                                                            <th>@L("State")</th>
+                                                            <th>@L("Country")</th>
+                                                            <th>@L("Pincode")</th>
+                                                            <th>Pan No.</th>
+                                                            <th>GST No.</th>
+                                                            <th>Is Default</th>
+                                                            <th style="width: 150px">@L("Actions")</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_CreateCategoryModal.cshtml", Model)
+
+<div class="modal fade" id="ContactCreateModal" tabindex="-1" role="dialog" aria-labelledby="ContactCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Add Contact Detail"))
+            <form name="contactForm" id="contactForm" role="form" class="form-horizontal" autocomplete="off">
+                <div class="modal-body" id="contact-body">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default close-button" data-dismiss="modal">@L("Cancel")</button>
+                    <button type="button" class="btn btn-primary save-contact-button">@L("Save")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* Taxation Detail *@
+<div class="modal fade" id="TaxationCreateModal" tabindex="-1" role="dialog" aria-labelledby="TaxationCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Add Taxation Detail"))
+            <form name="TaxationForm" id="TaxationForm" role="form" class="form-horizontal" autocomplete="off">
+                <div class="modal-body" id="taxation-body">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default close-button" data-dismiss="modal">@L("Cancel")</button>
+                    <button type="button" class="btn btn-primary save-taxation-button">@L("Save")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts
+{
+    <script src="~/view-resources/Views/Customers/CreateCustomer.js" asp-append-version="true"></script>
+}
+
+<script src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    function blockSpecialChar(e) {
+        var k;
+        document.all ? k = e.keyCode : k = e.which;
+        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
+    }
+
+    $('#ImageFile').on('change', function (e) {
+        $(this).next('.custom-file-label').html(e.target.files[0].name);
+    })
+</script>

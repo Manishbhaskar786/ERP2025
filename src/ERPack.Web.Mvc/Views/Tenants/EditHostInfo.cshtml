@@ -1,0 +1,205 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.MultiTenancy.Dto
+@using ERPack.Web.Models.Common.Modals
+@model HostTenantDto
+@{
+    ViewBag.Title = L("EditHostInfo");
+    ViewBag.CurrentPageName = PageNames.EditTenant;
+}
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Tenants/EditTenant.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Tenants/EditTenant.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("EditHostInfo")</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form name="TenantEditForm" id="tenantEditForm" role="form" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <input id="Id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>@L("Address")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="@Model.Address1" name="Address1" id="Address1" required>
+                                            <span asp-validation-for="@Model.Address1" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Address")2</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Address2" value="@Model.Address2" id="Address2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("City")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-city"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="City" value="@Model.City" id="City">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("State")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="State" value="@Model.State" id="State">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Pincode")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-pin"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Pincode" value="@Model.PinCode" id="Pincode" maxlength="6">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Country")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-flag"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Country" value="@Model.Country" id="Country">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="logoFile">Upload Logo</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="LogoFile" id="logoFile">
+                                                <label class="custom-file-label" for="logoFile">@(!string.IsNullOrEmpty(Model?.Logo) ? Model.Logo : "Choose File")</label>
+                                                <input type="hidden" id="hdnLogoFile" value="@Model.Logo" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>@L("BankName")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="@Model.BankName" name="BankName" id="bankName" required>
+                                            <span asp-validation-for="@Model.BankName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("AccountNumber")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="AccountNumber" value="@Model.AccountNumber" id="accountNumber" required>
+                                            <span asp-validation-for="@Model.AccountNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("Branch")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-city"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="Branch" value="@Model.Branch" id="branch">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("IFSCCode")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="IFSCCode" value="@Model.IFSCCode" id="iFSCCode">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@L("GSTNumber")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-pin"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="GSTNumber" value="@Model.GSTNumber" id="gSTNumber">
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label>@L("PANNumber")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-map-pin"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="PANNumber" value="@Model.PANNumber" id="pANNumber">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right save-button">@L("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const logoFileInput = document.getElementById('logoFile');
+    const logoFileLabel = document.querySelector('.custom-file-label');    
+
+    logoFileInput.addEventListener('change', function () {
+        const fileName = this.files[0] ? this.files[0].name : '';
+        logoFileLabel.textContent = fileName;
+        // if (fileName != "Choose File") {
+        //     const guid = generateGUID();
+        //     logoFileLabel.textContent = fileName
+        //         + "_"
+        //         + guid.Substring(0, 4)
+        //         + getFileExtension(fileName);
+        // }
+        // else { logoFileLabel.textContent = fileName;  }
+    });
+
+    // function generateGUID() {
+    //     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    //         const r = Math.random() * 16 | 0;
+    //         const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    //         return v.toString(16);
+    //     });
+    // }
+
+    // function getFileExtension(filename) {
+    //     const parts = filename.split('.');
+    //     return parts.length > 1 ? parts.pop() : '';
+    // }
+
+</script>

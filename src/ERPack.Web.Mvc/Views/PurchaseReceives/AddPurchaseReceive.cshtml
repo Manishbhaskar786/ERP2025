@@ -1,0 +1,131 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.PurchaseReceive
+@model AddEditPurchaseReceiveModel
+@{
+    ViewBag.Title = L("PurchaseReceive");
+    ViewBag.CurrentPageName = PageNames.AddPurchaseReceive;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("PurchaseReceive")</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form name="purchaseReceiveCreateForm" id="purchaseReceiveCreateForm" role="form" class="form-horizontal">
+                        <div class="card-body">
+                            <input id="Id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>@L("POCode"):</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                            </div>
+                                            <select class="form-control" name="POCode" id="poCode" onchange="GetPurchaseOrderItems(this)">
+                                                <option value="" selected>Select</option>
+                                                @if (Model != null && Model.PurchaseOrders != null)
+                                                {
+                                                    @foreach (var v in Model.PurchaseOrders)
+                                                    {
+                                                        <option value="@v.Id">@v.POCode</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <input type="hidden" class="form-control" id="purchaseOrderId" name="PurchaseOrderId" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="purchaseReceiveDate">@L("Date")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                            </div>
+                                            <input type="date" id="purchaseReceiveDate" name="PurchaseReceiveDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row" id="purchaseReceivesRows">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label>@L("Vendor"):</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" id="vendor" name="Vendor" readonly>
+                                            <input type="hidden" class="form-control" id="vendorId" name="VendorId" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <table id="tblPurchaseReceive" class="table table-striped table-bordered nowrap">
+                                        <thead>
+                                            <tr style="text-align: center;">
+                                                <th>Material Name</th>
+                                                <th>Qty Ordered</th>
+                                                <th>Unit</th>
+                                                <th>Qty Received</th>
+                                                <th>Store</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="purchaseReceiveRow">
+                                                <td>
+                                                    <input type="hidden" id="materialId0">
+                                                    <input type="hidden" class="form-control" id="purchaseOrderItemId0" name="PurchaseOrderItemId" readonly>
+                                                    <label id="materialName0"></label>
+                                                </td>
+                                                <td>
+                                                    <label id="qtyOrderd0"></label>
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" id="unitId0">
+                                                    <label id="unit0"></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="qtyReceived0" oninput="validateInput20digitwith2decimal(this)" class="form-control" />
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" id="storeId0">
+                                                        <option value="" selected>Select @L("Store")</option>
+                                                        @if (Model != null && Model.Stores != null)
+                                                        {
+                                                            @foreach (var v in Model.Stores)
+                                                            {
+                                                                <option value="@v.Id">@v.StoreName</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary float-right save-button" onclick="SavePurchaseReceive()">@L("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts
+    {
+    <script src="~/view-resources/Views/PurchaseReceives/PurchaseReceive.js" asp-append-version="true"></script>
+}

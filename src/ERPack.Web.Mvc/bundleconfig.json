@@ -1,0 +1,372 @@
+[
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.css",
+    "inputFiles": [
+      "wwwroot/libs/font-awesome/css/all.css",
+      "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+      "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
+      "wwwroot/libs/toastr/toastr.css",
+      "wwwroot/libs/admin-lte/dist/css/adminlte.css",
+      "wwwroot/css/style.css",
+      "wwwroot/view-resources/Views/Account/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.js",
+    "inputFiles": [
+      "wwwroot/libs/jquery/jquery.js",
+      "wwwroot/libs/bootstrap/dist/js/bootstrap.bundle.js",
+      "wwwroot/libs/admin-lte/dist/js/adminlte.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.unobtrusive.js",
+      "wwwroot/libs/toastr/toastr.min.js",
+      "wwwroot/libs/block-ui/jquery.blockUI.js",
+      "wwwroot/libs/spin/spin.js",
+      "wwwroot/libs-ext/spin/jquery.spin.js",
+      "wwwroot/libs/sweetalert/sweetalert.min.js",
+      "wwwroot/libs/moment/moment-with-locales.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.css",
+    "inputFiles": [
+      "wwwroot/libs/font-awesome/css/all.min.css",
+      "wwwroot/libs-ext/famfamfam-flags/dist/sprite/famfamfam-flags.min.css",
+      "wwwroot/libs/icheck-bootstrap/icheck-bootstrap.css",
+      "wwwroot/libs/toastr/toastr.css",
+      "wwwroot/libs/admin-lte/dist/css/adminlte.min.css",
+      "wwwroot/libs/datatables/css/dataTables.bootstrap4.min.css",
+      "wwwroot/libs/datatables/css/responsive.bootstrap4.min.css",
+      "wwwroot/libs/datatables/css/buttons.bootstrap4.min.css",
+      "wwwroot/css/style.css",
+      "wwwroot/view-resources/Views/Shared/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.js",
+    "inputFiles": [
+      "wwwroot/libs/jquery/jquery.js",
+      "wwwroot/libs/bootstrap/dist/js/bootstrap.bundle.js",
+      "wwwroot/libs/datatables/js/jquery.dataTables.min.js",
+      "wwwroot/Common/helpers.js",
+      "wwwroot/Common/datatables.ajax.js",
+      "wwwroot/libs/datatables/js/dataTables.bootstrap4.min.js",
+      "wwwroot/libs/datatables/js/dataTables.responsive.min.js",
+      "wwwroot/libs/datatables/js/responsive.bootstrap4.min.js",
+      "wwwroot/libs/datatables/js/dataTables.buttons.js",
+      "wwwroot/libs/datatables/js/buttons.bootstrap4.js",
+      "wwwroot/libs/admin-lte/dist/js/adminlte.js",
+      "wwwroot/libs/block-ui/jquery.blockUI.js",
+      "wwwroot/libs/spin/spin.js",
+      "wwwroot/libs-ext/spin/jquery.spin.js",
+      "wwwroot/libs/sweetalert/sweetalert.min.js",
+      "wwwroot/libs/toastr/toastr.min.js",
+      "wwwroot/libs/moment/moment-with-locales.js",
+      "wwwroot/libs/signalr/dist/browser/signalr.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/libs/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.js",
+      "wwwroot/libs/jquery-validate/jquery.validate.unobtrusive.js",
+      "wwwroot/libs/push.js/push.js",
+      "wwwroot/js/abp.dataTable.js",
+      "wwwroot/js/main.js",
+      "wwwroot/view-resources/Views/Shared/_Layout.js",
+      "wwwroot/js/typeahead.js/typeahead.bundle.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/home-index.min.js",
+    "inputFiles": [
+      "wwwroot/libs/chartjs/dist/Chart.js",
+      "wwwroot/view-resources/Views/Home/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/imageHelpers.min.js",
+    "inputFiles": [
+      "wwwroot/Common/imageHelpers.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Tenants/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Tenants/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Users/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Users/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Users/ChangePassword.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Users/ChangePassword.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Roles/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Roles/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Login.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Login.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Register.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Register.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/datatables.ajax.min.js",
+    "inputFiles": [
+      "wwwroot/Common/datatables.ajax.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/helpers.min.js",
+    "inputFiles": [
+      "wwwroot/Common/helpers.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/CRM/Enquires.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/CRM/Enquires.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/CRM/Estimate.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/CRM/Estimate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/CRM/Estimates.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/CRM/Estimates.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/CRM/NewEnquiry.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/CRM/NewEnquiry.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Production/Design.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Production/Design.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Inventory/IssueInventory.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Inventory/IssueInventory.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Materials/AddMaterial.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Materials/AddMaterial.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Materials/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Materials/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Preferences/AddPreference.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Preferences/AddPreference.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Preferences/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Preferences/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/PurchaseOrders/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/PurchaseOrders/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Users/CreateUser.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Users/CreateUser.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Vendors/CreateVendor.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Vendors/CreateVendor.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Vendors/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Vendors/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Workorders/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Workorders/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Production/Workorder.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Production/Workorder.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Production/WorkordersList.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Production/WorkordersList.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Inventory/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Inventory/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Stores/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Stores/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Stores/_EditModal.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Stores/_EditModal.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/PurchaseReceives/PurchaseReceive.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/PurchaseReceives/PurchaseReceive.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/PurchaseReceives/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/PurchaseReceives/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/PurchaseIndents/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/PurchaseIndents/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/datatables/js/dataTables.select.min.js",
+    "inputFiles": [
+      "wwwroot/libs/datatables/js/dataTables.select.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Production/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Production/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/datatables/js/select.dataTables.min.js",
+    "inputFiles": [
+      "wwwroot/libs/datatables/js/select.dataTables.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/datatables/css/select.dataTables.min.css",
+    "inputFiles": [
+      "wwwroot/libs/datatables/css/select.dataTables.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/datatables/css/dataTables.checkboxes.min.css",
+    "inputFiles": [
+      "wwwroot/libs/datatables/css/dataTables.checkboxes.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/datatables/css/dataTables.dataTables.min.css",
+    "inputFiles": [
+      "wwwroot/libs/datatables/css/dataTables.dataTables.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Customers/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Customers/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/PurchaseOrders/PurchaseOrder.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/PurchaseOrders/PurchaseOrder.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Tenants/EditTenant.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Tenants/EditTenant.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/SetPassword.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/SetPassword.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Department/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Department/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/HostInfo/EditHostInfo.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/HostInfo/EditHostInfo.js"
+    ]
+  }
+]

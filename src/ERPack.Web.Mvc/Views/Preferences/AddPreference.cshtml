@@ -1,0 +1,161 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.Preferences
+@model AddEditPreferenceModel
+@{
+    ViewBag.Title = L("AddPreference");
+    ViewBag.CurrentPageName = PageNames.AddPreference;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("AddPreference")</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form name="preferenceCreateForm" id="preferenceCreateForm" role="form" class="form-horizontal">
+                        <div class="card-body">
+                            <input id="Id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="IdType">Select Id Type</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <select asp-for="IdType" class="form-control">
+                                                <option value="0">Select Id Type</option>
+                                                <option value="CustomerId">Customer Id</option>
+                                                <option value="VendorId">Vendor Id</option>
+                                                <option value="MaterialId">Material Id</option>
+                                                <option value="EstimateId">Estimate Id</option>
+                                                <option value="WorkOrderId">Work Order Id</option>
+                                                <option value="InvoiceId">Invoice Id</option>
+                                                <option value="PurchaseOrderId">Purchase Order Id</option>
+                                                <option value="InventoryIssueId">Inventory Issue Id</option>
+                                                <option value="InventoryReqId">Inventory Req Id</option>
+                                                <option value="EnquiryId">Enquiry Id</option>
+                                                <option value="WorkorderTaskId">Workorder Task Id</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>@L("NameIdentifier")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <select asp-for="NameIdentifier" class="form-control">
+                                                <option value="0" Selected>Select Name Identifier</option>
+                                                <option value="1stTwoCharacters">1st two Characters</option>
+                                                <option value="2Charactersof1stWord">2 Characters of 1st word</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group required">
+                                        <label>@L("FixedName")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="FixedName" value="@Model.FixedName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>@L("MonthSelection")</label>
+                                        <div class="input-group mb-3">
+                                            <span>
+                                                @if (Model.MonthSelection == "Yes")
+                                                {
+                                                    <input type="radio" id="MonthSelection" name="MonthSelection" value="Yes" checked>
+                                                    <label for="MonthSelection">Yes</label>
+
+                                                    <br>
+                                                    <input type="radio" id="MonthSelection" name="MonthSelection" value="No">
+                                                    <label for="MonthSelection">No</label>
+
+                                                }
+                                                else if (Model.MonthSelection == "No")
+                                                {
+                                                    <input type="radio" id="MonthSelection" name="MonthSelection" value="Yes">
+                                                    <label for="MonthSelection">Yes</label>
+
+                                                    <br>
+                                                    <input type="radio" id="MonthSelection" name="MonthSelection" value="No" checked>
+                                                    <label for="MonthSelection">No</label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" id="MonthSelection" name="MonthSelection" value="Yes">
+                                                    <label for="MonthSelection">Yes</label>
+
+                                                    <br>
+                                                    <input type="radio" id="MonthSelection" name="MonthSelection" value="No" checked>
+                                                    <label for="MonthSelection">No</label>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>@L("YearSelection")</label>
+                                        <div class="input-group mb-3">
+                                            <span>
+                                                @if (Model.YearSelection == "Yes")
+                                                {
+                                                    <input type="radio" id="YearSelection" name="YearSelection" value="Yes" checked>
+                                                    <label for="YearSelection">Yes</label>
+                                                    <br>
+                                                    <input type="radio" id="YearSelection" name="YearSelection" value="No">
+                                                    <label for="YearSelection">No</label>
+                                                }
+                                                else if (Model.YearSelection == "Yes")
+                                                {
+                                                    <input type="radio" id="YearSelection" name="YearSelection" value="Yes">
+                                                    <label for="YearSelection">Yes</label>
+                                                    <br>
+                                                    <input type="radio" id="YearSelection" name="YearSelection" value="No" checked>
+                                                    <label for="YearSelection">No</label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" id="YearSelection" name="YearSelection" value="Yes">
+                                                    <label for="YearSelection">Yes</label>
+                                                    <br>
+                                                    <input type="radio" id="YearSelection" name="YearSelection" value="No" checked>
+                                                    <label for="YearSelection">No</label>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right save-button">@L("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+    {
+    <script src="~/view-resources/Views/Preferences/AddPreference.js" asp-append-version="true"></script>
+}

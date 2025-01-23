@@ -1,0 +1,208 @@
+﻿@using ERPack.Users.Dto
+@model UserDto
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>View User</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home Page</a></li>
+                        <li class="breadcrumb-item"><a href="/Users">Users</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">View User</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-sm-6">
+                <a href="/Users/CreateUser?userId=@Model.Id" class="btn bg-blue col-2 float-sm-right">
+                    @L("Edit")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="user-information">
+            <div class="row user-info">
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <img src="~/UserImage/@Model.Image" alt="User Profile" onerror="this.onerror=null;this.src='@Url.Content("~/img/user-default.png")';" class="left img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8 mt-4">
+                    <div class="view-user-detail">
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">@L("UserName"):</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@Model.UserName</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">@L("EmailAddress"):</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@Model.EmailAddress</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">@L("Name"):</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@Model.Name</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">@L("Surname"):</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@Model.Surname</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">@L("Gender"):</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@Model.Gender</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">Status:</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@(Model.IsActive ? "Active" : "Blocked")</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">@L("Designation"):</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@(!string.IsNullOrEmpty(Model.Designation) ? Model.Designation : "-")</span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 col-md-3">
+                                <label class="font-weight-bold">Department:</label>
+                            </div>
+                            <div class="col-8 col-md-9">
+                                <span>@Model.Department.DeptName</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row mb-3">
+                        <div class="col-1">
+                            <label class="font-weight-bold">@L("DOB"):</label>
+                        </div>
+                        <div class="col-3">
+                            <span>@(Model.DOB.ToString("dd/MM/yyyy"))</span>
+                        </div>
+                        <div class="col-1">
+                            <label class="font-weight-bold">Age:</label>
+                        </div>
+                        <div class="col-3">
+                            <span>25</span>
+                        </div>
+                        <div class="col-1">
+                            <label class="font-weight-bold">@L("Mobile"):</label>
+                        </div>
+                        <div class="col-3">
+                            <span>@(!string.IsNullOrEmpty(Model.Mobile) ? Model.Mobile : "-")</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">@L("Address"):</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(!string.IsNullOrEmpty(Model.Address1) ? Model.Address1 : "-")</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">@L("Address")2:</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(!string.IsNullOrEmpty(Model.Address2) ? Model.Address2 : "-")</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">@L("City"):</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(!string.IsNullOrEmpty(Model.City) ? Model.City : "-")</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">@L("State"):</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(!string.IsNullOrEmpty(Model.State) ? Model.State : "-")</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">@L("Country"):</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(!string.IsNullOrEmpty(Model.Country) ? Model.Country : "-")</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">@L("Pincode"):</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(!string.IsNullOrEmpty(Model.PinCode) ? Model.PinCode : "-")</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">@L("DOJ"):</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(Model.DOJ.ToString("dd/MM/yyyy"))</span>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <label class="font-weight-bold">Aadhar:</label>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <span>@(!string.IsNullOrEmpty(Model.AdhaarNumber) ? Model.AdhaarNumber : "-")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-files">
+                <h4>Files</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="font-weight-bold">Aadhar Card</label><br>
+                        <div class="file-card">
+                            <a href="~/AdhaarDoc/@Model.AdhaarDoc" download><i class="fas @(!string.IsNullOrEmpty(Model.AdhaarDoc) ? "fa-download" : "") "></i> @Model.AdhaarDoc</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="font-weight-bold">Pan Card</label><br>
+                        <div class="file-card">
+                            <a href="~/PANDoc/@Model.PANDoc" download><i class="fas @(!string.IsNullOrEmpty(Model.PANDoc) ? "fa-download" : "")"></i> @Model.PANDoc</a>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.AcademicDocs))
+                    {
+                        <div class="col-md-4">
+                            <label class="font-weight-bold">Certificates</label><br>
+                            <div class="file-card-grid row">
+                                @foreach (var filename in Model.AcademicDocs.Split(','))
+                                {
+                                    <div class="certificate-file-name">
+                                        <a href="~/AcademicDoc/@filename" download><i class="fas fa-download"></i> @filename </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>

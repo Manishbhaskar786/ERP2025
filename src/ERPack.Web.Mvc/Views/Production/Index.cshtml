@@ -1,0 +1,132 @@
+﻿@using ERPack.Web.Models.Production;
+@using ERPack.Web.Startup
+@model AddEditProductionModel
+@{
+    ViewBag.Title = L("Production");
+    ViewBag.CurrentPageName = PageNames.Production;
+}
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Production/Index.js" asp-append-version="true"></script>
+        <script src="~/js/typeahead.js/typeahead.bundle.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Production/Index.min.js" asp-append-version="true"></script>
+        <script src="~/js/typeahead.js/typeahead.bundle.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Production")</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="tblTasksList" class="table table-striped table-bordered nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>@L("Sno")</th>
+                                        <th>@L("WorkorderId")</th>
+                                        <th>@L("SubtaskId")</th>
+                                        <th>@L("CompletionBy")</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive-sm" id="divMaterialList" style="display:none">
+                    <input id="hdnTaskId" type="hidden" value="">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-md-6">
+                                <table id="tblMaterialList" class="table table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th style="display:none">MaterialId</th>
+                                            <th style="display:none">TypeId</th>
+                                            <th>Item Code</th>
+                                            <th>Material Description</th>
+                                            <th>Qty</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tblMaterialData">
+                                    </tbody>
+                                </table>
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-check form-check-primary mt-4">
+                                                <input type="checkbox" class="form-check-input" id="chkClarification" onchange="SetStatus(this)">
+                                                <label class="form-check-label"> Clarification</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-primary float-right" id="btnSetStock" onclick="RequestStock()">Request Stock</button>
+                                        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;" id="btnStockReceived" onclick="SetStatus(this)">Stock Received</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="form-check form-check-primary mt-3">
+                                                <input type="checkbox" class="form-check-input" id="chkClarification" onchange="SetStatus(this)">
+                                                <label class="form-check-label">Open Checklist</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex flex-wrap float-right" style="margin: 20px;">
+                                    <button type="button" id="btnTaskComplete" onclick="SetStatus(this)" class="btn btn-primary">Task Complete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive-sm" id="divCompletedTasksList" style="display:none">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Completed Tasks</h4>
+                        <div class="row">
+                            <table id="tblCompletedTaskList" class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th style="display:none">Material ID</th>
+                                        <th style="display:none">SubtaskId</th>
+                                        <th>Workorder ID</th>
+                                        <th>Sub Task ID</th>
+                                        <th>Completion By</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblCompletedTasksData">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

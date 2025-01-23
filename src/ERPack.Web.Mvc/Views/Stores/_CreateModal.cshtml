@@ -1,0 +1,28 @@
+﻿@using ERPack.Web.Models.Common.Modals
+@{
+    Layout = null;
+}
+<div class="modal fade" id="StoreCreateModal" tabindex="-1" role="dialog" aria-labelledby="StoreCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("AddNewStore")))
+            <form name="storeCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("StoreName")</label>
+                        <div class="col-md-9">
+                            <input type="text" name="StoreName" maxlength="100" class="form-control" required minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("StoreLocation")</label>
+                        <div class="col-md-9">
+                            <input type="text" name="StoreLocation" maxlength="100" minlength="2" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

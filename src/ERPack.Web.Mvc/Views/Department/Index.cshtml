@@ -1,0 +1,79 @@
+﻿@using ERPack.Web.Startup
+@{
+    ViewBag.Title = L("Department");
+    ViewBag.CurrentPageName = PageNames.Department;
+}
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Department/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Department/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Department Master Data</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home Page</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Department</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-sm-6">
+                <a href="javascript:;" data-toggle="modal" data-target="#departmentCreateModal" class="btn bg-blue float-sm-right">
+                    <i class="fa fa-plus-square"></i>
+                    @L("Create")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Use for bulk actions-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="DepartmentTable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No#</th>
+                                        <th>Department Name</th>
+                                        <th>Description</th>
+                                        <th style="width: 150px">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("~/Views/Department/_CreateModal.cshtml")
+
+<div class="modal fade" id="DepartmentEditModal" tabindex="-1" role="dialog" aria-labelledby="DepartmentEditModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+

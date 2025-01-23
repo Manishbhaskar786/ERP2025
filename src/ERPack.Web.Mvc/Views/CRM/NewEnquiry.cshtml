@@ -1,0 +1,402 @@
+﻿@using ERPack.Web.Models.CRM;
+@using ERPack.Web.Startup;
+@model AddEditEnquiryModel
+@{
+    ViewBag.CurrentPageName = PageNames.NewEnquiry;
+    ViewData["Title"] = ViewBag.Title;
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/CRM/EnquiryList">Enquiry List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <form name="enquiryCreateForm" id="enquiryCreateForm" role="form" class="form-horizontal" method="post">
+            <!-- Single Card for all sections -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- First Section -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group" style="margin:0">
+                                <input id="Id" type="hidden" name="Id" value="@Model.Id" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label for="EnquiryId">@L("Enquiry")</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="EnquiryId" name="EnquiryId" value="@Model.EnquiryId" required readonly>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label for="DateAndTime">Enquiry DateTime</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                    </div>
+                                    <input type="datetime-local" class="form-control" id="DateAndTime" name="DateAndTime" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label for="CustomerName">@L("Customer") @L("Name") * </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-provide="typeahead" id="taCustomers" name="CustomerName" value="@Model.CustomerName" required>
+                                    <span class="input-group-prepend">
+                                        <a href="/Customers/CreateCustomer?customerId=0&returnUrl=/CRM/NewEnquiry" class="btn btn-primary"><i class="fa fa-plus-square"></i></a>
+                                    </span>
+                                </div>
+                                <input type="hidden" id="hdnCustomers" name="CustomerId" value="@Model.CustomerId" required>
+                            </div>
+                            <div class="custom-control custom-switch custom-switch-priority">
+                                <input type="checkbox" class="custom-control-input" id="IsHighPriority" name="IsHighPriority" value="true" @(Model.IsHighPriority ? "checked" : "")>
+                                <label class="custom-control-label" for="IsHighPriority">High Priority</label>
+                                <input type="hidden" id="hdnHighPriority">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="container mt-2">
+                                <div class="row">
+                                    <div class="col-lg-4 image-container">
+                                        <div class="form-group">
+                                            <div class="file">
+                                                <div id="filePreview" class="border mb-3">
+                                                    <input id='fileUpload' type='file' name="DesignImageDoc" data-role="file-upload" hidden />
+                                                    @if (Model != null && Model.DesignImage != null)
+                                                    {
+                                                        @if (!Model.DesignImage.Contains("pdf"))
+                                                        {
+                                                            <img id="designImage" src="@Model.DesignImage" data-filetype="image" data-role="other-image" alt="" />
+                                                            <embed id="pdfPreview" src="" data-filetype="pdf" data-role="pdf-image" type="application/pdf" style="display:none" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img id="designImage" src="" data-filetype="image" data-role="other-image" alt="" style="display:none" />
+                                                            <embed id="pdfPreview" src="@Model.DesignImage" data-filetype="pdf" data-role="pdf-image" type="application/pdf"  />
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <img id="designImage" src="/img/default-image.jpg" data-filetype="image" data-role="other-image" alt="" />
+                                                        <embed id="pdfPreview" src="" data-filetype="pdf" data-role="pdf-image"  type="application/pdf" />
+                                                    }
+                                                    <div id="myModal" class="modal" data-role="modal">
+                                                        <span class="close">&times;</span>
+                                                        <div class="modal-content">
+                                                            <img id="designImagemodal" src="" data-filetype="image" data-role="modal-image"  alt="" />
+                                                            <embed id="pdfPreviewmodal" src="" data-filetype="pdf" data-role="modal-pdf" type="application/pdf" />
+                                                            <input type="range" min="1" max="3" step="0.1" value="1" class="zoom-slider" id="zoomSlider">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="icon-buttons" id="icon-buttons">
+                                                        <button type="button" class="btn btn-outline-primary" onclick="UploadFile()">
+                                                            <i class="fas fa-upload"></i>
+                                                        </button>
+                                                        <button type="button" id="magnify" data-role="magnify" class="btn btn-outline-primary mx-2" disabled>
+                                                            <i class="fas fa-search"></i>
+                                                        </button>
+                                                        <a id="downloadLink" class="btn btn-outline-primary disabled-link" data-role="download-link" href="@Model.DesignImage" download="@Model.DesignImage">
+                                                            <i class="fas fa-download"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                       
+                    </div>
+                    <hr class="custom-divider" />
+                    <!-- Second Section -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group col-lg-9">
+                                <label>@L("DesignNumber") * </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                                    </div>
+                                              <input type="text" class="form-control" data-provide="typeahead" id="taDesignNumber" name="DesignNumber" value="@Model.DesignNumber" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>@L("DesignName")</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-provide="typeahead" id="taDesignName" name="DesignName" value="@Model.DesignName">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Design Users  * </label>
+                                <div class="input-group mb-3">
+                                              <select id="DesignUsers" name="DesignUserId" class="form-control" onchange="" aria-label="Select User" required>
+                                        <option value="" selected disabled>Select User</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="hdnDesignUserId" name="DesignUserIds" value="@Model.DesignUserId">
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Number of Ups</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" id="NumberofUps" name="NumberofUps" value="@Model.NumberOfUps" step="1" onkeypress="return event.charCode !== 46 && validateNumberofUps(20,this)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group col-lg-9">
+                                <label>Box Length * </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" name="BoxLength" onkeypress="return validateNumberofUps(23,this)" value="@Model.BoxLength" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Box Width * </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" name="BoxWidth" onkeypress="return validateNumberofUps(23,this)" value="@Model.BoxWidth" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Box Height * </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" name="BoxHeight" onkeypress="return validateNumberofUps(23,this)" value="@Model.BoxHeight" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>@L("BoardType") </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-provide="typeahead" id="taBoardType" name="BoardType" value="@Model.BoardTypeName">
+                                </div>
+                                <input type="hidden" id="hdnBoardType" name="BoardTypeId" value="@Model.BoardTypeId">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="custom-divider" />
+                    <!-- Third Section -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group col-lg-9">
+                                <div class="form-check form-check-primary">
+                                    <input type="checkbox" class="form-check-input" id="IsBraile" name="IsBraile" data-control-class="braileCheckboxControl" onchange="setStatus(this.checked, 'braileCheckboxControl')" value="true" @(Model.IsBraile ? "checked" : "")>
+                                    <label class="form-check-label">Braile</label>
+                                    <input type="hidden" id="hdnBraile" value="@(Model.IsBraile ? "true" : "false")">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Braile Length</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control braileCheckboxControl" id="braileLength" onkeypress="return event.charCode !== 46 && validateNumberofUps(20,this)" name="BraileLength" value="@Model.BraileLength">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Braile Width</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control braileCheckboxControl" id="braileWidth" name="BraileWidth" value="@Model.BraileWidth" onkeypress="return event.charCode !== 46 && validateNumberofUps(20,this)">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Braile Comments</label>
+                                <textarea class="form-control expandable-textarea braileCheckboxControl" maxlength="255" id="braileComments" name="BraileComments">@Model.BraileComments</textarea>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group col-lg-9">
+                                <div class="form-check form-check-primary">
+                                    <input type="checkbox" class="form-check-input" id="IsEmboss" name="IsEmboss" data-control-class="embossCheckboxControl" onchange="setStatus(this.checked, 'embossCheckboxControl')" value="true" @(Model.IsEmboss ? "checked" : "")>
+                                    <label class="form-check-label">Emboss</label>
+                                    <input type="hidden" id="hdnEmboss" value="@(Model.IsEmboss ? "true" : "false")">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Emboss Length</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control embossCheckboxControl" name="EmbossLength" value="@Model.EmbossLength" onkeypress="return event.charCode !== 46 && validateNumberofUps(20,this)">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Emboss Width</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control embossCheckboxControl" name="EmbossWidth" value="@Model.EmbossWidth" onkeypress="return event.charCode !== 46 && validateNumberofUps(20,this)">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Emboss Comments</label>
+                                <textarea class="form-control expandable-textarea embossCheckboxControl" name="EmbossComments" maxlength="255">@Model.EmbossComments</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="custom-divider" />
+                    <!-- Fourth Section -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group col-lg-9">
+                                <label>@L("ToolType") * </label>
+                                <div class="input-group mb-3">
+                                    <select id="toolTypes" class="form-control" name="ToolTypeId" aria-label="Select ToolType" onchange="GetMaterialsByType(this)" required>
+                                        <option value="" selected disabled>Select ToolType</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="hdnToolTypeId" value="@Model.ToolTypeId">
+                            </div>               
+                            <div class="form-group col-lg-9">
+                                <label>@L("ToolConfiguration") * </label>
+                                <div class="input-group mb-3">
+                                    <select id="toolConfiguration" class="form-control" name="ToolConfigurationId" aria-label="Select Tool Configuration" required>
+                                        <option value="" selected disabled>Select Tool Configuration</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="hdnToolConfigurationId" value="@Model.ToolConfigurationId">
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>@L("ToolFamily")</label>
+                                <div class="input-group mb-3">
+                                    <select id="toolfamily" class="form-control" name="ToolFamilyId" aria-label="Select Tool Family">
+                                        <option value="0">Select Tool Family</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="hdnToolFamilyId" value="@Model.ToolFamilyId">
+                            </div>
+                       
+                            <div class="form-group col-lg-9">
+                                <table id="tblMaterials">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding-right: 5px">Material Name</th>
+                                            <th style="padding-right: 5px">Item Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="MaterialRow">
+                                            <td style="padding-right: 5px">
+                                                <input type="hidden" id="hdnEnquiryMaterialId0" name="EnquiryMaterialId0" value="0"/>
+                                                <input type="hidden" id="hdnMaterialId0" name="MaterialId0" value="0"/>
+                                                 <select class="form-control" id="materialName0" name="MaterialName0" onchange="fnFillMaterialInfo(this)">
+                                                    <option value="" selected>Select @L("Material")</option>
+                                                    @if (Model != null && Model.Materials != null)
+                                                    {
+                                                        @foreach (var v in Model.Materials)
+                                                        {
+                                                            <option value="@v.Id">@v.DisplayName</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td style="padding-right: 5px">
+                                                <input type="text" id="itemCode0" name="ItemCode0" class="form-control" readonly />
+                                            </td>
+                                            <td class="text-center" style="padding-right: 5px">
+                                                <a href="javascript:void(0)"><i class="fas fa-trash" hidden></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" style="text-align: left;">
+                                                <input type="button" class="btn btn-primary" id="addRow" value="Add Row" onclick="CloneRow()" style="margin-top: 10px" />
+                                                <span id="erraddRow" class="error"></span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group col-lg-9">
+                                <label>@L("SheetSizeLength")</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" name="SheetSizeLength" value="@Model.SheetSizeLength" onkeypress="return event.charCode !== 46 && validateNumberofUps(20,this)">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>@L("SheetSizeWidth")</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" name="SheetSizeWidth" value="@Model.SheetSizeWidth" onkeypress="return event.charCode !== 46 && validateNumberofUps(20,this)">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-9">
+                                <label>Comments</label>
+                                <textarea class="form-control expandable-textarea" name="Comments" maxlength="255">@Model.Comments</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer fixed-bottom bg-light border-top">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" id="btnSendDesign" class="btn btn-primary float-right save-button">@L("SendToDesign")</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script src="~/view-resources/Views/CRM/NewEnquiry.js" asp-append-version="true"></script>
+    <script src="~/js/typeahead.js/typeahead.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/view-resources/Views/_Bundles/imageHelpers.min.js" asp-append-version="true"></script>
+} 

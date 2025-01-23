@@ -1,0 +1,179 @@
+﻿@using ERPack.Web.Startup
+@using ERPack.Web.Models.PurchaseOrder
+@model AddEditPurchaseOrderModel
+@{
+    ViewBag.Title = L("PurchaseOrder");
+    ViewBag.CurrentPageName = PageNames.AddPurchaseOrder;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("PurchaseOrder")</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form name="purchaseOrderCreateForm" id="purchaseOrderCreateForm" role="form" class="form-horizontal">
+                        <div class="card-body">
+                            <input id="Id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group required">
+                                        <label>@L("POCode"):</label>
+                                        <input type="text" class="form-control" id="poCode" name="POCode" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="VendorId">@L("Vendor")</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+                                            </div>
+                                            <select class="form-control" id="vendorId" name="VendorId">
+                                                <option value="" selected>Select @L("Vendor")</option>
+                                                @if (Model != null && Model.Vendors != null)
+                                                {
+                                                    @foreach (var v in Model.Vendors)
+                                                    {
+                                                        if (v.Id == Model.VendorId)
+                                                            {
+                                                                <option value="@v.Id" selected>@v.VendorName</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@v.Id" >@v.VendorName</option>
+                                                            }
+                                                        
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row" id="purchaseOrderRows">
+                                <div class="col-12">
+                                    <table id="tblPurchaseOrder">
+                                        <thead>
+                                            <tr style="text-align: center;">
+                                                <th>Type</th>
+                                                <th>Item Code</th>
+                                                <th>Item Description</th>
+                                                <th>Buying Unit</th>
+                                                <th>Buying Price</th>
+                                                <th>Qty Purchase</th>
+                                                <th>Date of Purchase</th>
+                                                <th>Amount</th>
+                                                <th>CGST</th>
+                                                <th>IGST</th>
+                                                <th>SGST</th>
+                                                <th>Amount GST</th>
+                                                <th>Total Amount</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="purchaseOrderRow">
+                                                <td>
+                                                    <input type="hidden" id="hdnitemTypeId0">
+                                                    <select class="form-control" id="itemTypeId0" onchange="GetMaterialsByType(this)">
+                                                        <option value="" selected>Select @L("ItemType")</option>
+                                                        @if (Model != null && Model.ItemTypes != null)
+                                                        {
+                                                            @foreach (var v in Model.ItemTypes)
+                                                            {
+                                                               <option value="@v.Id">@v.ItemTypeName</option> 
+                                                            }
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" id="hdnmaterialId0">
+                                                    <select class="form-control" id="materialId0" onchange="fnFillMaterialInfo(this)">
+                                                        <option value="" selected>Select @L("Material")</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" id="hdnmaterialName0">
+                                                    <select class="form-control" id="materialName0" onchange="fnFillMaterialInfo(this)">
+                                                        <option value="" selected>Select @L("Material")</option>
+                                                    </select>
+                                                </td>
+                                                 <td>
+                                                <input type="hidden" id="buyingUnitId0">
+                                                <select class="form-control" id="buyingUnitName0">
+                                                    <option value="" selected>Select @L("Unit")</option>
+                                                    @if (Model != null && Model.Units != null)
+                                                    {
+                                                        @foreach (var v in Model.Units)
+                                                        {
+                                                            <option value="@v.Id">@v.UnitName</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                                <td>
+                                                    <input type="text" id="buyingPrice0" class="form-control" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="qtyPurchase0" class="form-control" onchange="CalculateAmount(this)" />
+                                                </td>
+                                                <td>
+                                                    <input type="datetime-local" id="createdDateTime0" value="@DateTime.Now" class="form-control" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="amount0" class="form-control" onchange="CalculateAmount(this)"/>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="cGST0" class="form-control" onchange="CalculateAmount(this)"/>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="iGST0" class="form-control" onchange="CalculateAmount(this)" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="sGST0" class="form-control" onchange="CalculateAmount(this)" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="amountGST0" class="form-control" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="totalAmount0" class="form-control" />
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="javascript:void(0)"><i class="fas fa-trash" hidden></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5" style="text-align: left;">
+                                                    <input type="button" class="btn btn-primary " id="addRow" value="Add Row" />
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary float-right save-button" onclick="SavePurchaseOrder()">@L("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+    {
+    <script src="~/view-resources/Views/PurchaseOrders/PurchaseOrder.js" asp-append-version="true"></script>
+}

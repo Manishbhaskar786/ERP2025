@@ -1,0 +1,70 @@
+﻿@using ERPack.Web.Models.Customers
+@model AddEditTaxationInfoModel
+<input type="hidden" id="TaxationId" name="TaxationId" value="@Model.Id" />
+    <div class="row col-md-12">
+        <div class="form-group col-md-6 required">
+            <label>Address Name*</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="AddressName" id="AddressName" value="@Model.AddressName" required>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>@L("Address") 1*</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="Address1" id="Address1" value="@Model.Address1" required>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 required">
+            <label>@L("Address") 2</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="Address2" id="Address2" value="@Model.Address2">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>@L("City")*</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="City" id="City" value="@Model.City" required>
+            </div>
+        </div>
+        <div class="form-group col-md-6 required">
+            <label>@L("State")*</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                </div>
+                @Html.DropDownListFor(m => m.StateId, new SelectList(Model.States, "StateId", "StateName", Model.StateId), "Select State", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group col-md-6 required">
+            <label>@L("Country")*</label>
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-flag"></i></span>
+            </div>
+            @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "CountryId", "CountryName", Model.CountryId), "Select Country", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>@L("Pincode")*</label>
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" name="PinCode" id="PinCode" value="@Model.PinCode" required maxlength="6">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Pan No.*</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="PANNumber" id="PANNumber" value="@Model.PANNumber" required>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>GST No.*</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="GSTNumber" id="GSTNumber" value="@Model.GSTNumber" required>
+            </div>
+        </div>
+        <div class="form-group col-md-6 mt-3">
+        @Html.CheckBoxFor(model => model.IsDefault, new { id = "IsDefault" })
+        <label class="col-form-label" for="IsDefault">Is Default</label>
+        </div>
+    </div>

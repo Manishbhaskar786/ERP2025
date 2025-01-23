@@ -1,0 +1,311 @@
+﻿@using ERPack.Common.Dto
+@using ERPack.Web.Startup
+@using ERPack.Web.Models.Users
+@using Abp.Authorization.Users
+@model AddEditUserModel
+@{
+    ViewBag.Title = L("CreateUser");
+    ViewBag.CurrentPageName = PageNames.CreateUser;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1> @(Model.Id > 0 ? L("EditUser") : L("CreateUser"))</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home Page</a></li>
+                        <li class="breadcrumb-item"><a href="/Users">Users</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@(Model.Id > 0 ? "Edit" : "Create") User</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <form name="userCreateForm" id="userCreateForm" role="form" class="form-horizontal" enctype="multipart/form-data" autocomplete="off">
+                        <div class="card-body">
+                            <input id="Id" type="hidden" Name="Id" class="form-control" value="@Model.Id">
+                            <div class="row col-md-12">
+                                <div class="form-group col-md-6">
+                                    <label>@L("UserName")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="UserName" value="@Model.UserName" @(Model.Id > 0 ? "readonly" : "") required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2" autocomplete="off" @(Model.Id > 0 ? "readonly" : "")>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Name")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Name" value="@Model.Name" required maxlength="@AbpUserBase.MaxNameLength" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Surname")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Surname" value="@Model.Surname" required maxlength="@AbpUserBase.MaxSurnameLength" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("EmailAddress")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control disabled" name="EmailAddress" @(Model.Id > 0 ? "readonly" : "") value="@Model.EmailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength" autocomplete="off" @(Model.Id > 0 ? "readonly" : "")>
+                                    </div>
+                                </div>
+                                <div class="form-group required col-md-6">
+                                    <label>@L("DOB")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        </div>
+                                        <input type="date" class="form-control" name="DOB" required value="@(Model.DOB != DateTime.MinValue ? Model.DOB.ToString("yyyy-MM-dd") : string.Empty)" id="DOB" placeholder="yyyy-MM-dd">
+                                    </div>
+                                </div>
+                                <div class="form-group required col-md-6">
+                                    <label>@L("Gender")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-venus-mars"></i></span>
+                                        </div>
+                                        @Html.DropDownListFor(emp => emp.Gender,
+                                                 new SelectList(Enum.GetValues(typeof(GenderEnum))),
+                                                 "Select Gender",
+                                                 new { @class = "form-control " })
+                                        @Html.ValidationMessageFor(emp => emp.Gender, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @if (Model.Id == 0)
+                                {
+                                    <div class="form-group col-md-6">
+                                        <label>@L("Password")*</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control" name="Password" id="Password" required maxlength="@AbpUserBase.MaxPlainPasswordLength" autocomplete="off">
+                                            <div class="input-group-text"><i class="fas fa-eye-slash" id="eyepass"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>@L("ConfirmPassword")*</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" required maxlength="@AbpUserBase.MaxPlainPasswordLength" autocomplete="off">
+                                            <div class="input-group-text"><i class="fas fa-eye-slash" id="eyeconpass"></i></div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="form-group col-md-6">
+                                    <label>@L("Mobile")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Mobile" value="@Model.Mobile" id="Mobile" autocomplete="off" placeholder="+910000000000">
+                                    </div>
+                                </div>
+                                <div class="form-group required col-md-6">
+                                    <label for="Department">Department*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                        </div>
+                                        <select class="form-control required" id="DepartmentId" name="DepartmentId">
+                                            <option value="" selected>Select Department</option>
+                                            @foreach (var v in Model.Departments)
+                                            {
+                                                if (v.Id == Model.DepartmentId)
+                                                {
+                                                    <option value="@v.Id" selected>@v.DeptName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@v.Id">@v.DeptName</option>
+                                                }
+                                            }
+                                        </select>
+                                        <span class="input-group-append">
+                                            <a href="javascript:;" onclick="fadeit()" data-toggle="modal" data-target="#DepartmentCreateModal" class="btn btn-primary Departmentmodal"><i class="fa fa-plus-square"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Address")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="@Model.Address1" name="Address1" id="Address1" autocomplete="off" maxlength="@AbpUserBase.MaxUserNameLength">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Address")2</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Address2" value="@Model.Address2" id="Address2" autocomplete="off" maxlength="@AbpUserBase.MaxUserNameLength">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("City")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-city"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="City" value="@Model.City" id="City" maxlength="30">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("State")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.State, new SelectList(Model.States, "StateName", "StateName", Model.State), "Select State", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Pincode")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-map-pin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" pattern="^\d{6}$" name="Pincode" value="@Model.PinCode" id="Pincode" title="Please enter a valid 6-digit PIN code." autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Country")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-flag"></i></span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.Country, new SelectList(Model.Countries, "CountryName", "CountryName", Model.Country), "Select Country", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("DOJ")*</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-handshake"></i></span>
+                                        </div>
+                                        <input type="date" class="form-control" name="DOJ" required value="@(Model.DOJ != DateTime.MinValue ? Model.DOJ.ToString("yyyy-MM-dd") : string.Empty)" id="DOJ" placeholder="yyyy-MM-dd">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Designation")</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="Designation" value="@Model.Designation" id="Designation" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Adhaar No.</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="AdhaarNumber" value="@Model.AdhaarNumber" id="AdhaarNumber" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="adhaarDoc">Upload Adhaar</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input form-control" name="AdhaarDocFile" id="AdhaarDocFile">
+                                            <label class="custom-file-label" for="AdhaarDocFile">@(string.IsNullOrEmpty(Model.AdhaarDoc) ? "Choose File" : Model.AdhaarDoc)</label>
+                                            <input type="hidden" class="custom-filename-hidden" id="hdnAdhaarFile" value="@Model.AdhaarDoc" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="image">Upload Image</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input form-control" name="ImageFile" id="ImageFile">
+                                            <label class="custom-file-label" for="ImageFile">@(string.IsNullOrEmpty(Model.Image) ? "Choose File" : Model.Image)</label>
+                                            <input type="hidden" class="custom-filename-hidden" id="hdnImageFile" value="@Model.Image" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Upload PAN</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input form-control" name="PANDocFile" id="PANDocFile">
+                                            <label class="custom-file-label" for="PANDocFile">@(string.IsNullOrEmpty(Model.PANDoc) ? "Choose File" : Model.PANDoc)</label>
+                                            <input type="hidden" class="custom-filename-hidden" id="hdnPANFile" value="@Model.PANDoc" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="academicDocs">Upload Certificates</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="AcademicDocsFile" multiple id="AcademicDocsFile">
+                                            <label class="custom-file-label" for="AcademicDocsFile">@(string.IsNullOrEmpty(Model.AcademicDocs) ? "Choose Documents" : Model.AcademicDocs)</label>
+                                            <input type="hidden" id="hdnAcademicFile" value="@Model.AcademicDocs" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 mt-3">
+                                    @Html.CheckBoxFor(model => model.IsActive, new { id = "CreateUserIsActive" })
+                                    <label class="col-form-label" for="CreateUserIsActive">@L("IsActive")</label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@L("Roles")*</label>
+                                    <div class="row mt-3">
+                                        @foreach (var role in Model.Roles)
+                                        {
+                                            <div class="col-md-3">
+                                                <input type="radio" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" class="filled-in" @(Model.UserIsInRole(role) ? "checked" : "") />
+                                                <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right save-button">@L("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_CreateDepartmentModal.cshtml", Model)
+
+@section scripts
+{
+    <script>
+        function fadeit() {
+            $(".modal-backdrop").hide();
+        }
+        setInterval(fadeit, 3000);
+
+    </script>
+    <script src="~/view-resources/Views/Users/CreateUser.js" asp-append-version="true"></script>
+}

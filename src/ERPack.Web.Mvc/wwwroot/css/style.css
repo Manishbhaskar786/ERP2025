@@ -1,0 +1,310 @@
+﻿/* prevent the drop down icon going onto a new line for the top bar language link */
+.top-bar-language-nav-link {
+    min-width: 65px;
+}
+
+/* bootstrap model showing two scroll bars */
+html {
+    overflow: visible;
+}
+
+/* main sidebar not under model */
+.modal {
+    z-index: 1110;
+}
+
+.form-group.required .col-form-label:after {
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 3px;
+}
+
+.nav-user-menu .user-image {
+    width: 20px;
+    margin-right: 4px;
+    margin-top: -4px;
+}
+
+.famfamfam-flags {
+    display: inline-block;
+}
+
+.blink_text {
+    animation-name: blink;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: Infinite;
+    margin: 0;
+}
+
+@keyframes blink {
+    0% {
+        color: #ff0000;
+    }
+
+    50% {
+        color: #cc1c1c;
+    }
+
+    100% {
+        color: #ff0000;
+        font-weight: bold;
+    }
+}
+
+.card {
+    padding: 20px 10px 20px 20px;
+    margin-left: 0px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.twitter-typeahead {
+    flex: 1;
+}
+
+.tt-menu {
+    width: 100%;
+    border: 1px solid #ced4da;
+    padding: 5px;
+    text-align: left;
+    background-color: white
+}
+
+.tt-suggestion {
+    font-size: 14px;
+    font-weight: 400;
+    color: #444;
+    padding: 5px;
+}
+
+    .tt-suggestion:hover {
+        background-color: #f4f6f9;
+        cursor: pointer
+    }
+
+#imagePreview {
+    padding-top: 0px;
+    width: 50pt;
+    height: 50pt;
+    border: 1px solid #000;
+}
+
+.custom-divider {
+    border-top: 3px solid #ddd;
+    margin: 20px 0;
+}
+
+.file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#filePreview {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ddd;
+    position: relative;
+    display: inline-block;
+}
+
+#designImage, #pdfPreview {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.designImage, .pdfPreview {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.form-control-disabled {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    height: 38px;
+}
+
+.filePreview {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ddd;
+    position: relative;
+    display: inline-block;
+}
+
+
+.custom-upload-button {
+    margin-top: 10px;
+}
+
+.input-group-prepend {
+    height: 38px;
+}
+
+.custom-switch-priority {
+    margin-left: 10px;
+}
+
+/*Modal popup for image Styling*/
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+    .modal-content img {
+        justify-content: center;
+        width: 100%;
+        height: auto;
+        display: block;
+        max-width: none;
+    }
+
+.close {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    color: whitesmoke;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.zoom-slider {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+/*//END*/
+.disabled-link {
+    pointer-events: none;
+    color: #6c757d; /* Bootstrap's disabled text color */
+    background-color: #e9ecef; /* Bootstrap's disabled background color */
+    border-color: #dee2e6; /* Bootstrap's disabled border color */
+    opacity: 0.65;
+}
+
+.image-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Initially hide the section */
+.hidden {
+    display: none;
+}
+
+/* Optional: Smooth transition effect */
+#toggleSection {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    overflow: hidden;
+    max-height: 100%;
+    opacity: 0;
+}
+
+    #toggleSection.visible {
+        /*max-height: 1000px;*/ /* Adjust based on content height */
+        opacity: 1;
+    }
+
+/* View user css start */
+
+.view-user-detail {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.file-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 35px;
+}
+
+.user-info .left {
+    height: 15rem;
+    width: 15rem;
+}
+
+.user-information {
+    background-color: #fff;
+    padding: 20px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.file-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust minmax() value as needed */
+    grid-gap: 10px;
+}
+
+.certificate-file-name {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background-color: #f8f8f8; /* Add background color for visual distinction */
+}
+
+/* View user css end */
+
+/* Validation css start */
+
+#userCreateForm .text-danger,
+#customerCreateForm .text-danger {
+    display: block;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    background-position: right calc(.375em + 1.0rem) center !important;
+}
+/* Validation css end */

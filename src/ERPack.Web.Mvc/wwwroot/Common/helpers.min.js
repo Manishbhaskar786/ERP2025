@@ -1,0 +1,1 @@
+var app=app||{};(function(){app.htmlUtils={htmlEncodeText:function(n){return $("<div/>").text(n).html()},htmlDecodeText:function(n){return $("<div/>").html(n).text()},htmlEncodeJson:function(n){return JSON.parse(app.htmlUtils.htmlEncodeText(JSON.stringify(n)))},htmlDecodeJson:function(n){return JSON.parse(app.htmlUtils.htmlDecodeText(JSON.stringify(n)))}}})();
