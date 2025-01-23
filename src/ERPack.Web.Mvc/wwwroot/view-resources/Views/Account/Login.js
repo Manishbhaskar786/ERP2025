@@ -27,7 +27,7 @@
     if (/[^a-zA-Z0-9]/.test(subdomain)) {
         tenancyName = null;
     }
-    else if (subdomain == "erpack" || subdomain == "localhost" || subdomain == "www") {
+    else if (subdomain == "erpack" || subdomain == "localhost" || subdomain == "www"|| subdomain == "erpackdev" || subdomain == "erpackstaging") {
         tenancyName = null;
     }
     else {
